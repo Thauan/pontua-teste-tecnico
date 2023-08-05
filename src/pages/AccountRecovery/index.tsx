@@ -5,40 +5,32 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import TextInput from '../../components/TextInput';
 import * as S from './styles';
-import { useAuth } from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
 
 const schema = yup
   .object({
     email: yup.string()
       .email("O e-mail deve ser valido")
-      .required("O campo e-mail é obrigatorio"),
-    password: yup.string().required("O campo senha é obrigatorio"),
+      .required("O campo e-mail é obrigatorio")
   })
   .required()
 
-function Login() {
+function AccountRecovery() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onChange'
   });
-
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { login }: any = useAuth();
-
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log(data);
-    login({
-      email: data.email,
-      password: data.password
-    });
+    console.log(errors.email, "errors");
   }
+
+  console.log(isValid, "isValid");
 
   return (
     <>
@@ -53,7 +45,7 @@ function Login() {
             </S.LeftContent>
 
             <S.RightContent>
-              <AuthCard title='Bem-vindo' description='informe as suas credenciais de acesso ao portal' >
+              <AuthCard title='Recuperar senha' description='Informe o e-mail do seu cadastro. Nós estaremos realizando o envio de um link com as instruções para você redefinir a sua senha.' >
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                   <Controller
                     name="email"
@@ -62,37 +54,13 @@ function Login() {
                       <TextInput
                         {...field}
                         error={errors.email}
-                        placeholder='E-mail'
+                        placeholder='Informe seu e-mail'
                         onButtonClick={() => console.log('a')}
                       />
                     )}
                   />
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <TextInput
-                        {...field}
-                        isPassword={true}
-                        error={errors.password}
-                        placeholder='Informe sua senha'
-                        buttonChildren={<img src='/icons/eye.svg' />}
-                        onButtonClick={() => console.log('a')}
-                      />
-                    )}
-                  />
-
-                  <Button>entrar</Button>
+                  <Button disabled={!isValid}>enviar link</Button>
                 </form>
-
-                <div className="footer">
-                  <Link
-                    to="/recovery/account"
-                    relative="route"
-                    className="link">
-                      Esqueceu a senha?
-                  </Link>
-                </div>
               </AuthCard>
             </S.RightContent>
           </S.Content>
@@ -102,4 +70,4 @@ function Login() {
   )
 }
 
-export default Login
+export default AccountRecovery;

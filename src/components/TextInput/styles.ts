@@ -37,4 +37,16 @@ export const Wrapper = styled.div`
         justify-content: center;
         align-items: center;
     }
+
+    .error {
+        color: red;
+        padding-top: 5px;
+    }
+`
+
+export const Error = styled.div`
+    .error {
+        color: red;
+        margin-top: 2px;
+    }
 `

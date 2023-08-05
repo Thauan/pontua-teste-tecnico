@@ -10,6 +10,11 @@ export const Wrapper = styled.button`
 
     transition: all 400ms;
 
+    &:disabled {
+        opacity: 1;
+        background-color: #C3C3C3;
+    }
+
     &:hover {
         opacity: 0.9;
     }
