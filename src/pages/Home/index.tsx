@@ -3,19 +3,20 @@ import { Container } from './styles';
 import { getCharacters } from '../../services/characters';
 
 const Home: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [characters, setCharacters] = useState<any>([]);
+  const [characters, setCharacters] = useState<[]>([]);
+  const [currentPage] = useState<number>(1);
 
   useEffect(() => {
-    getData();
-  }, []);
+    getDataCharacters(currentPage);
+  }, [currentPage]);
 
   console.log(characters);
 
-  const getData = async () => {
-    const data = await getCharacters();
+  const getDataCharacters = async (page: number) => {
+    const data = await getCharacters(page);
     setCharacters(data);
   }
+
   return (
     <Container>
       <h1>HOME</h1>
