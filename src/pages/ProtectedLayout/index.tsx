@@ -1,10 +1,16 @@
 import { Navigate, useOutlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { SideBar } from "../../components/Sidebar";
+import { Wrapper } from "./styles";
+import { useSidebar } from "../../hooks/useSidebar";
+import SearchBar from "../../components/SearchBar";
 
 export const ProtectedLayout = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { user }: any = useAuth();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { openedSidebar }: any = useSidebar();
+
     const outlet = useOutlet();
 
     if (!user) {
@@ -14,15 +20,10 @@ export const ProtectedLayout = () => {
     return (
         <div>
             <SideBar />
-            <p>Busca</p>
-            {/* <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/login">login</Link></li>
-                    <li><Link to="/recovery/account">recovery</Link></li>
-                </ul>
-            </nav> */}
-            {outlet}
+            <Wrapper openedSidebar={openedSidebar}>
+                <SearchBar />
+                {outlet}
+            </Wrapper>
         </div>
     );
 };

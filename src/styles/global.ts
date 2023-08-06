@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Epilogue', sans-serif;
   }
 
   img {

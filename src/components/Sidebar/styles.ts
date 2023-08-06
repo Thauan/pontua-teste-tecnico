@@ -20,7 +20,6 @@ export const Content = styled.div`
 	height: 100%;
 	display: flex;
 	box-shadow: 6px 0px 18px 0px rgba(0, 0, 0, 0.06);
-	background-color: red;
 `;
 
 export const ClosedSideBar = styled.header`
@@ -41,8 +40,18 @@ export const ClosedSideBar = styled.header`
 	flex-direction: column;
 	justify-content: space-between;
 
+	.logo {
+		width: 105px;
+		height: 29px;
+	}
+
+	.divider {
+		border-bottom: 1px solid #EBEFF2;
+		width: 100%;
+	}
+
 	svg {
-		color: #f9f9f9;
+		color: #00000;
 	}
 
 	ul li {
@@ -55,6 +64,9 @@ export const ClosedSideBar = styled.header`
 		align-items: center;
 		flex-direction: column;
 		width: 100%;
+		height: 100%;
+		box-shadow: 6px 0px 18px 0px rgba(0, 0, 0, 0.06);
+		background: var(--white, #FFF);
 
 		> button {
 			width: 100%;
@@ -76,14 +88,50 @@ export const ClosedSideBar = styled.header`
 			color: #c4c4c4;
 		}
 
+		div {
+			margin-top: 13px;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: row;
+			gap: 0px;
+			padding: 3px;
+
+			h1 {
+				color: #fff;
+				font-size: 14px;
+
+				animation: ${appearFromRight} 0.4s;
+			}
+		}
+
 		ul {
-			margin-top: 64px;
+			margin-top: 16px;
 			width: 100%;
 			text-align: center;
 			display: flex;
 			align-items: center;
 			flex-direction: column;
 
+			.link {
+					animation: ${appearFromRight} 0.4s;
+
+					&--active {
+						color: #F21A05;
+					}
+
+					svg {
+						width: 24px;
+						height: 24px;
+						stroke: #000;
+					}
+
+					&--active > svg {
+						width: 24px;
+						height: 24px;
+						stroke: #F21A05;
+					}
+				}
 			a {
 				width: 100%;
 				padding: 16px 0;
@@ -123,22 +171,43 @@ export const ClosedSideBar = styled.header`
 			align-items: center;
 			flex-direction: column;
 
-			a {
-				padding: 16px 0;
+			ul {
+				margin-top: 15px;
 				width: 100%;
+				text-align: left;
 				display: flex;
-				align-items: center;
-				justify-content: center;
+				flex-direction: column;
 
-				transition: color 0.3s;
-				&:hover {
-					svg path {
-						color: var(--third-color);
+				.link {
+					animation: ${appearFromRight} 0.4s;
+
+					&--active {
+						color: #F21A05;
+					}
+
+					svg {
+						width: 24px;
+						height: 24px;
+					}
+
+					&--active > svg {
+						width: 24px;
+						height: 24px;
+						stroke: #F21A05;
 					}
 				}
-				svg {
-					width: 20px;
-					height: 20px;
+
+				a {
+					color: #000000;
+					padding: 16px 20px;
+					border-radius: 8px 0 0 8px;
+					animation: ${appearFromRight} 0.4s;
+
+					display: flex;
+					align-items: center;
+					gap: 16px;
+
+					transition: background 0.3s;
 				}
 			}
 		}
@@ -160,7 +229,7 @@ export const ClosedSideBar = styled.header`
 
 export const OpenSideBar = styled.header`
 	height: 100%;
-	width: 100%;
+	width: 256px;
 
 	position: fixed;
 	left: 0;
@@ -172,7 +241,13 @@ export const OpenSideBar = styled.header`
 	align-items: center;
 
 	.logo {
-		width: 104.775px;
+		width: 110px;
+		height: 35px;
+	}
+
+	.divider {
+		border-bottom: 1px solid #EBEFF2;
+		width: 100%;
 	}
 
 	section {
@@ -199,7 +274,6 @@ export const OpenSideBar = styled.header`
 			flex-direction: column;
 			width: 100%;
 			height: 100%;
-			background-color: red;
 			box-shadow: 6px 0px 18px 0px rgba(0, 0, 0, 0.06);
 			background: var(--white, #FFF);
 
@@ -246,14 +320,33 @@ export const OpenSideBar = styled.header`
 			}
 
 			ul {
-				margin-top: 64px;
+				margin-top: 15px;
 				width: 100%;
 				text-align: left;
 				display: flex;
 				flex-direction: column;
 
+				.link {
+					animation: ${appearFromRight} 0.4s;
+
+					&--active {
+						color: #F21A05;
+					}
+
+					svg {
+						width: 24px;
+						height: 24px;
+					}
+
+					&--active > svg {
+						width: 24px;
+						height: 24px;
+						stroke: #F21A05;
+					}
+				}
+
 				a {
-					color: #c4c4c4;
+					color: #000000;
 					padding: 16px 20px;
 					border-radius: 8px 0 0 8px;
 
@@ -262,28 +355,12 @@ export const OpenSideBar = styled.header`
 					gap: 16px;
 
 					transition: background 0.3s;
-					&:hover {
-						background: var(--shadow-black-color);
-
-						svg path {
-							color: var(--third-color);
-						}
-					}
-
-					p {
-						animation: ${appearFromRight} 0.4s;
-					}
-
-					svg {
-						width: 20px;
-						height: 20px;
-					}
 				}
 			}
 		}
 
-		/* Icones que pode não ser tão principais no app */
 		div {
+			margin-top: 16px;
 			display: flex;
 			align-items: center;
 			flex-direction: column;
