@@ -1,10 +1,10 @@
 import { Controller, useForm } from 'react-hook-form';
-import AuthCard from '../../components/AuthCard';
-import Button from '../../components/Button';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import TextInput from '../../components/TextInput';
-import * as S from './styles';
+import { AuthCard } from '../../components/AuthCard';
+import { Button } from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
+import { Container, Content, Header, LeftContent, RightContent, Wrapper } from './styles';
 
 const schema = yup
   .object({
@@ -27,24 +27,20 @@ function AccountRecovery() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     console.log(data);
-    console.log(errors.email, "errors");
   }
-
-  console.log(isValid, "isValid");
 
   return (
     <>
-      <S.Wrapper>
-        <S.Container>
-          <S.Header>
+      <Wrapper>
+        <Container>
+          <Header>
             <img className="logo" src="/logos/logo.png" alt="Logo do sistema Pontua" />
-          </S.Header>
-          <S.Content>
-            <S.LeftContent>
+          </Header>
+          <Content>
+            <LeftContent>
               <img src="/illustrations/building.png" alt="Ilustração de um edificio" />
-            </S.LeftContent>
-
-            <S.RightContent>
+            </LeftContent>
+            <RightContent>
               <AuthCard title='Recuperar senha' description='Informe o e-mail do seu cadastro. Nós estaremos realizando o envio de um link com as instruções para você redefinir a sua senha.' >
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                   <Controller
@@ -62,10 +58,10 @@ function AccountRecovery() {
                   <Button disabled={!isValid}>enviar link</Button>
                 </form>
               </AuthCard>
-            </S.RightContent>
-          </S.Content>
-        </S.Container>
-      </S.Wrapper>
+            </RightContent>
+          </Content>
+        </Container>
+      </Wrapper>
     </>
   )
 }

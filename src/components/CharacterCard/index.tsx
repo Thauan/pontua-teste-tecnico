@@ -1,8 +1,16 @@
 import { Card, CardContent, CardDescription, CardTitle, Image } from './styles';
 
-// React.FC
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CharacterCard: any = ({ character, last, penult }: any) => {
+// type Character = {
+//     t
+// }
+interface CharacterCardProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    character: any;
+    last: boolean;
+    penult: boolean;
+}
+
+const CharacterCard = ({ character, last, penult }: CharacterCardProps) => {
     const lastItem = last ? 'last' : '';
     const penultItem = penult ? 'penult' : '';
 

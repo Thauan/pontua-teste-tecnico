@@ -1,11 +1,18 @@
-import { createContext, useMemo } from "react";
+import { ReactElement, createContext, useMemo } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-const SidebarContext = createContext({});
+interface SidebarProps {
+	openedSidebar?: boolean;
+	toggle: () => void;
+}
+
+const SidebarContext = createContext<SidebarProps>({
+  openedSidebar: true,
+  toggle: () => {}
+});
 
 interface SidebarProviderProps {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	children?: any;
+	children?: ReactElement;
 }
 
 const SidebarProvider = ({ children }: SidebarProviderProps) => {

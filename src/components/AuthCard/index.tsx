@@ -20,4 +20,4 @@ function AuthCard({ title, description, children }: AuthCardProps) {
     )
 }
 
-export default AuthCard;
+export { AuthCard };

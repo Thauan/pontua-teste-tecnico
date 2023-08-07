@@ -27,4 +27,4 @@ function TextInput(props: TextInputProps) {
     )
 }
 
-export default TextInput;
+export { TextInput };

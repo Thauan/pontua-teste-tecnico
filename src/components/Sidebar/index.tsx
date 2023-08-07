@@ -13,24 +13,18 @@ interface SidebarProps {
 
 const SideBar = () => {
 	const { openedSidebar, toggle }: SidebarProps = useSidebar();
-
-	const handleChangeSideBar = () => toggle();
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const location = useLocation();
 
-	console.log(location.pathname, "location");
-	console.log(matchPath('/dashboard/profile', String(location.pathname)), "match");
+	const handleChangeSideBar = () => toggle();
 
 	const checkCurrentRoute = (route: string) => {
-		console.log(matchPath(String(route), String(location.pathname)) !== null);
-		console.log(route);
-
-		if(matchPath(String(route), String(location.pathname)) !== null) {
+		if (matchPath(String(route), String(location.pathname)) !== null) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 	return (
 		<Container>
 			<Content>
@@ -55,6 +49,12 @@ const SideBar = () => {
 								</Link>
 							</ul>
 							<div className="divider" />
+
+							<ul>
+								<a href="/" className="link">
+									<FiCornerUpLeft />
+								</a>
+							</ul>
 						</nav>
 					</ClosedSideBar>
 				) : (

@@ -17,8 +17,7 @@ export const useLocalStorage = (keyName: any, defaultValue: any) => {
         }
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const setValue = (newValue: any) => {
+    const setValue = (newValue: string) => {
         try {
             window.localStorage.setItem(keyName, JSON.stringify(newValue));
         } catch (err) {

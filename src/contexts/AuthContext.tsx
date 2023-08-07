@@ -2,7 +2,13 @@ import { createContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-const AuthContext = createContext({});
+export interface AuthProps {
+  login: (data: { email: string, password: string}) => void;
+}
+
+const AuthContext = createContext<AuthProps>({
+  login: () => {}
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AuthProvider = ({ children, userData }: any) => {

@@ -1,12 +1,13 @@
 import { Controller, useForm } from 'react-hook-form';
-import AuthCard from '../../components/AuthCard';
-import Button from '../../components/Button';
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import TextInput from '../../components/TextInput';
-import * as S from './styles';
-import { useAuth } from '../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { AuthCard } from '../../components/AuthCard';
+import { Button } from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
+import { useAuth } from '../../hooks/useAuth';
+import { AuthProps } from '../../contexts/AuthContext';
+import { Container, Content, Header, LeftContent, RightContent, Wrapper, } from './styles';
 
 const schema = yup
   .object({
@@ -27,12 +28,10 @@ function Login() {
   });
 
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { login }: any = useAuth();
+  const { login }: AuthProps = useAuth();
 
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: { email: string, password: string }) => {
     login({
       email: data.email,
       password: data.password
@@ -41,17 +40,17 @@ function Login() {
 
   return (
     <>
-      <S.Wrapper>
-        <S.Container>
-          <S.Header>
+      <Wrapper>
+        <Container>
+          <Header>
             <img className="logo" src="/logos/logo.png" alt="Logo do sistema Pontua" />
-          </S.Header>
-          <S.Content>
-            <S.LeftContent>
+          </Header>
+          <Content>
+            <LeftContent>
               <img src="/illustrations/building.png" alt="Ilustração de um edificio" />
-            </S.LeftContent>
+            </LeftContent>
 
-            <S.RightContent>
+            <RightContent>
               <AuthCard title='Bem-vindo' description='informe as suas credenciais de acesso ao portal' >
                 <form className="form" onSubmit={handleSubmit(onSubmit)}>
                   <Controller
@@ -93,10 +92,10 @@ function Login() {
                   </Link>
                 </div>
               </AuthCard>
-            </S.RightContent>
-          </S.Content>
-        </S.Container>
-      </S.Wrapper>
+            </RightContent>
+          </Content>
+        </Container>
+      </Wrapper>
     </>
   )
 }

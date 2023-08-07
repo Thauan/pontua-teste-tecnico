@@ -15,4 +15,4 @@ function Button({ children, disabled = false }: ButtonProps) {
     )
 }
 
-export default Button;
+export { Button };
