@@ -52,6 +52,7 @@ export const ClosedSideBar = styled.header`
 
 	svg {
 		color: #00000;
+		stroke: #000;
 	}
 
 	ul li {

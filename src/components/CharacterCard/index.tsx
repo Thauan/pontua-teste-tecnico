@@ -1,15 +1,20 @@
-import React from 'react';
-import { Card, Image } from './styles';
+import { Card, CardContent, CardDescription, CardTitle, Image } from './styles';
 
 // React.FC
-const CharacterCard: any = ({ character }: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CharacterCard: any = ({ character, last, penult }: any) => {
+    const lastItem = last ? 'last' : '';
+    const penultItem = penult ? 'penult' : '';
+
+    const thumbnail = character.thumbnail.path + '.' + character.thumbnail.extension;
+
     return (
-        <Card>
-            <Image bg={'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png'} />
-            <div>
-                <h1>{character.name}</h1>
-                <p>{character.description}</p>
-            </div>
+        <Card className={`item-${lastItem}${penultItem}`}>
+            <Image src={thumbnail} />
+            <CardContent>
+                <CardTitle>{character.name}</CardTitle>
+                <CardDescription>{character.description}</CardDescription>
+            </CardContent>
         </Card>
     );
 }

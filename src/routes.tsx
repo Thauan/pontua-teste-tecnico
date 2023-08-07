@@ -1,11 +1,12 @@
 import { Route, createBrowserRouter, createRoutesFromElements, defer } from "react-router-dom";
 import { AuthLayout } from "./pages/AuthLayout";
-import Login from "./pages/Login";
 import { ProtectedLayout } from "./pages/ProtectedLayout";
 import { HomeLayout } from "./pages/HomeLayout";
 
-import Home from "./pages/Home";
-import AccountRecovery from "./pages/AccountRecovery";
+import { Login } from "./pages/Login";
+import { Home } from "./pages/Home";
+import { AccountRecovery } from "./pages/AccountRecovery";
+import { Profile } from "./pages/Profile";
 
 const getUserData = () =>
     new Promise((resolve) =>
@@ -22,11 +23,13 @@ const router = createBrowserRouter(
             loader={() => defer({ userPromise: getUserData() })}
         >
             <Route element={<HomeLayout />}>
+                <Route path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/recovery/account" element={<AccountRecovery />} />
             </Route>
 
             <Route path="/dashboard" element={<ProtectedLayout />}>
+                <Route path="profile" element={<Profile />} />
                 <Route path="home" element={<Home />} />
             </Route>
         </Route>
@@ -34,22 +37,3 @@ const router = createBrowserRouter(
 );
 
 export { router, getUserData };
-// import React from 'react';
-// import { Route, BrowserRouter, Routes as Router } from 'react-router-dom';
-// import Login from './pages/Login';
-// import AccountRecovery from './pages/AccountRecovery';
-
-// const Routes: React.FC = () => {
-//     return (
-//         <BrowserRouter>
-//             <main>
-//                 <Router>
-//                     <Route path="/login" element={<Login />} />
-//                     <Route path="/recovery/account" element={<AccountRecovery />} />
-//                 </Router>
-//             </main>
-//         </BrowserRouter>
-//     );
-// }
-
-// export default Routes;

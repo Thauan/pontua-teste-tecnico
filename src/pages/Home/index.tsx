@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
 import { getCharacters } from '../../services/characters';
@@ -11,28 +12,36 @@ const Home: React.FC = () => {
     getDataCharacters(currentPage);
   }, [currentPage]);
 
-  console.log(characters?.results?.length > 0);
 
   const getDataCharacters = async (page: number) => {
     const response = await getCharacters(page);
-    console.log(response.data)
     setCharacters(response.data);
+  }
+
+  const checkLastItems = (current: any, character: any) => {
+    if (current == character) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   return (
     <Container>
-      {characters?.results?.length ? characters?.results?.map((character: any) => {
-        return (
+      <>
+        {characters?.results?.length ? characters?.results?.map((character: any) => (
           <CharacterCard
+            key={character.id}
+            last={checkLastItems(character, characters?.results.at(-1))}
+            penult={checkLastItems(character, characters?.results.at(-2))}
             character={character}
           />
-        )
-      }) : (
-        <h1>carregando</h1>
-      )}
-      {/* <h1>HOME</h1> */}
+        )) : (
+          <h1>carregando</h1>
+        )}
+      </>
     </Container>
   );
 }
 
-export default Home;
+export { Home };

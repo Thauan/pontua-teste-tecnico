@@ -70,4 +70,4 @@ function AccountRecovery() {
   )
 }
 
-export default AccountRecovery;
+export { AccountRecovery };
