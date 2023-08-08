@@ -30,6 +30,12 @@ export const Content = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
+
 `
 
 export const LeftContent = styled.div`

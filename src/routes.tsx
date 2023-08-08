@@ -2,19 +2,20 @@ import { Route, createBrowserRouter, createRoutesFromElements, defer } from "rea
 import { AuthLayout } from "./pages/AuthLayout";
 import { ProtectedLayout } from "./pages/ProtectedLayout";
 import { HomeLayout } from "./pages/HomeLayout";
-
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { AccountRecovery } from "./pages/AccountRecovery";
 import { Profile } from "./pages/Profile";
+import { ChooseAgent } from "./pages/ChooseAgent";
 
-const getUserData = () =>
-    new Promise((resolve) =>
+const getUserData = () => {
+    return new Promise((resolve) =>
         setTimeout(() => {
             const user = window.localStorage.getItem("user");
             resolve(user);
         }, 3000)
     );
+}
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,6 +28,8 @@ const router = createBrowserRouter(
                 <Route path="/login" element={<Login />} />
                 <Route path="/recovery/account" element={<AccountRecovery />} />
             </Route>
+
+            <Route path="/choose/agent" element={<ChooseAgent />} />
 
             <Route path="/dashboard" element={<ProtectedLayout />}>
                 <Route path="profile" element={<Profile />} />

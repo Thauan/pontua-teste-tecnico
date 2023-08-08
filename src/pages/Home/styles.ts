@@ -8,6 +8,11 @@ export const Container = styled.div`
     grid-column-gap: 15px;
     grid-row-gap: 15px;
 
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
+
     .item-penult {
         grid-row-start: 3;
         grid-column-start: 1;

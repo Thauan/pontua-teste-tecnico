@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
         outline: none;
     }
 
-    button {
+    a {
         background: transparent;
 
         display: flex;

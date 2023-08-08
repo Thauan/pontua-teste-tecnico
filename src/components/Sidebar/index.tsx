@@ -4,6 +4,9 @@ import { FiUser, FiCornerUpLeft } from "react-icons/fi";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 import { Container, Content, ClosedSideBar, OpenSideBar } from "./styles";
 import { useSidebar } from "../../hooks/useSidebar";
+import { removeItemStorage } from "../../hooks/useLocalStorage";
+import { useAuth } from "../../hooks/useAuth";
+import { AuthProps } from "../../contexts/AuthContext";
 
 interface SidebarProps {
 	openedSidebar?: boolean;
@@ -13,6 +16,7 @@ interface SidebarProps {
 
 const SideBar = () => {
 	const { openedSidebar, toggle }: SidebarProps = useSidebar();
+	const { logout }: AuthProps = useAuth();
 	const location = useLocation();
 
 	const handleChangeSideBar = () => toggle();
@@ -23,6 +27,12 @@ const SideBar = () => {
 		} else {
 			return false;
 		}
+	}
+
+
+	const signOut = () => {
+		removeItemStorage('user');
+		logout();
 	}
 
 	return (
@@ -41,17 +51,17 @@ const SideBar = () => {
 
 							<div className="divider" />
 							<ul>
-								<Link to="/dashboard/home" relative="route" className={`link--${checkCurrentRoute('/dashboard/home') ? 'active' : ''}`}>
+								<Link to="/dashboard/home" relative="route" className={`link${checkCurrentRoute('/dashboard/home') ? '--active' : ''}`}>
 									<LuLayoutDashboard />
 								</Link>
-								<Link to="/dashboard/profile" relative="route" className={`link--${checkCurrentRoute('/dashboard/profile') ? 'active' : ''}`}>
+								<Link to="/dashboard/profile" relative="route" className={`link${checkCurrentRoute('/dashboard/profile') ? '--active' : ''}`}>
 									<FiUser />
 								</Link>
 							</ul>
 							<div className="divider" />
 
 							<ul>
-								<a href="/" className="link">
+								<a onClick={() => signOut()} className="link">
 									<FiCornerUpLeft />
 								</a>
 							</ul>
@@ -71,10 +81,10 @@ const SideBar = () => {
 								<div className="divider" />
 
 								<ul>
-									<Link to="/dashboard/home" relative="route" className={`link--${checkCurrentRoute('/dashboard/home') ? 'active' : ''}`}>
+									<Link to="/dashboard/home" relative="route" className={`link${checkCurrentRoute('/dashboard/home') ? '--active' : ''}`}>
 										<LuLayoutDashboard /> Home
 									</Link>
-									<Link to="/dashboard/profile" relative="route" className={`link--${checkCurrentRoute('/dashboard/profile') ? 'active' : ''}`}>
+									<Link to="/dashboard/profile" relative="route" className={`link${checkCurrentRoute('/dashboard/profile') ? '--active' : ''}`}>
 										<FiUser /> Perfil
 									</Link>
 								</ul>
@@ -82,7 +92,7 @@ const SideBar = () => {
 								<div className="divider" />
 
 								<ul>
-									<a href="/" className="link">
+									<a onClick={() => signOut()} className="link">
 										<FiCornerUpLeft /> Sair
 									</a>
 								</ul>

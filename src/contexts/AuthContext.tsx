@@ -1,23 +1,36 @@
-import { createContext, useMemo } from "react";
+import { ReactNode, createContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export interface AuthProps {
   login: (data: { email: string, password: string}) => void;
+  logout: () => void;
+  chooseToAgent: (agent: object) => void;
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
+  userData: object;
 }
 
 const AuthContext = createContext<AuthProps>({
-  login: () => {}
+  login: () => {},
+  logout: () => {},
+  chooseToAgent: () => {}
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const AuthProvider = ({ children, userData }: any) => {
+const AuthProvider = ({ children, userData }: AuthProviderProps) => {
   const [user, setUser] = useLocalStorage("user", userData);
+  const [choosedAgent, setChoosedAgent] = useLocalStorage("agent", null);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const login = async (data: any) => {
+  const login = async (data: { email: string, password: string }) => {
     setUser(data);
+    navigate("/choose/agent", { replace: true });
+  };
+
+  const chooseToAgent = async (agent: object) => {
+    setChoosedAgent(agent);
     navigate("/dashboard/home", { replace: true });
   };
 
@@ -28,6 +41,8 @@ const AuthProvider = ({ children, userData }: any) => {
 
   const value = useMemo(
     () => ({
+      chooseToAgent,
+      choosedAgent,
       user,
       login,
       logout

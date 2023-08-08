@@ -1,4 +1,4 @@
-import * as S from './styles'
+import { Wrapper } from './styles'
 
 type ButtonProps = {
     children: React.ReactNode;
@@ -8,9 +8,9 @@ type ButtonProps = {
 function Button({ children, disabled = false }: ButtonProps) {
     return (
         <>
-            <S.Wrapper disabled={disabled}>
+            <Wrapper disabled={disabled}>
                 {children}
-            </S.Wrapper>
+            </Wrapper>
         </>
     )
 }

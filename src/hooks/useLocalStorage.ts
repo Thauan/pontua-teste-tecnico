@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const useLocalStorage = (keyName: any, defaultValue: any) => {
+const useLocalStorage = (keyName: string, defaultValue: string | boolean | object | null) => {
     const [storedValue, setStoredValue] = useState(() => {
         try {
             const value = window.localStorage.getItem(keyName);
@@ -28,3 +27,21 @@ export const useLocalStorage = (keyName: any, defaultValue: any) => {
 
     return [storedValue, setValue];
 };
+
+const removeItemStorage = (keyName: string) => {
+    try {
+        window.localStorage.removeItem(keyName);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const clearStorage = () => {
+    try {
+        window.localStorage.clear();
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export { clearStorage, removeItemStorage, useLocalStorage }

@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'react';
 import * as S from './styles'
 
 type TextInputProps = {
-    onButtonClick(): void;
+    onButtonClick?: () => void;
     buttonChildren?: React.ReactNode | null;
     isPassword?: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,9 +18,9 @@ function TextInput(props: TextInputProps) {
         <>
             <S.Wrapper>
                 <input {...props} type={inputType} />
-                <button tabIndex={-1} onClick={props.onButtonClick} >
+                <a tabIndex={-1} onClick={props.onButtonClick} >
                     {props.buttonChildren}
-                </button>
+                </a>
             </S.Wrapper>
             <S.Error>{props.error && <p role="alert" className='error'>{props.error?.message}</p>}</S.Error>
         </>

@@ -6,7 +6,7 @@ import CharacterCard from '../../components/CharacterCard';
 
 const Home: React.FC = () => {
   const [characters, setCharacters] = useState<any>([]);
-  const [currentPage] = useState<number>(2);
+  const [currentPage] = useState<number>(1);
 
   useEffect(() => {
     getDataCharacters(currentPage);
@@ -28,7 +28,6 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <>
         {characters?.results?.length ? characters?.results?.map((character: any) => (
           <CharacterCard
             key={character.id}
@@ -39,7 +38,6 @@ const Home: React.FC = () => {
         )) : (
           <h1>carregando</h1>
         )}
-      </>
     </Container>
   );
 }

@@ -8,6 +8,7 @@ import { TextInput } from '../../components/TextInput';
 import { useAuth } from '../../hooks/useAuth';
 import { AuthProps } from '../../contexts/AuthContext';
 import { Container, Content, Header, LeftContent, RightContent, Wrapper, } from './styles';
+import { useState } from 'react';
 
 const schema = yup
   .object({
@@ -19,6 +20,8 @@ const schema = yup
   .required()
 
 function Login() {
+  const [isPassword, setIsPassword] = useState(true);
+
   const {
     control,
     handleSubmit,
@@ -61,7 +64,6 @@ function Login() {
                         {...field}
                         error={errors.email}
                         placeholder='E-mail'
-                        onButtonClick={() => console.log('a')}
                       />
                     )}
                   />
@@ -71,11 +73,11 @@ function Login() {
                     render={({ field }) => (
                       <TextInput
                         {...field}
-                        isPassword={true}
+                        isPassword={isPassword}
                         error={errors.password}
                         placeholder='Informe sua senha'
                         buttonChildren={<img src='/icons/eye.svg' />}
-                        onButtonClick={() => console.log('a')}
+                        onButtonClick={() => setIsPassword(!isPassword)}
                       />
                     )}
                   />

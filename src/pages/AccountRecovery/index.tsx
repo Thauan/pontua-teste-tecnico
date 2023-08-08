@@ -5,6 +5,7 @@ import { AuthCard } from '../../components/AuthCard';
 import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 import { Container, Content, Header, LeftContent, RightContent, Wrapper } from './styles';
+import { useState } from 'react';
 
 const schema = yup
   .object({
@@ -15,6 +16,8 @@ const schema = yup
   .required()
 
 function AccountRecovery() {
+  const [isSubmitted, setSubmited] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -26,7 +29,7 @@ function AccountRecovery() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
-    console.log(data);
+    setSubmited(data);
   }
 
   return (
@@ -41,23 +44,28 @@ function AccountRecovery() {
               <img src="/illustrations/building.png" alt="Ilustração de um edificio" />
             </LeftContent>
             <RightContent>
-              <AuthCard title='Recuperar senha' description='Informe o e-mail do seu cadastro. Nós estaremos realizando o envio de um link com as instruções para você redefinir a sua senha.' >
-                <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <TextInput
-                        {...field}
-                        error={errors.email}
-                        placeholder='Informe seu e-mail'
-                        onButtonClick={() => console.log('a')}
-                      />
-                    )}
-                  />
-                  <Button disabled={!isValid}>enviar link</Button>
-                </form>
-              </AuthCard>
+              {!isSubmitted ? (
+                <AuthCard title='Recuperar senha' description='Informe o e-mail do seu cadastro. Nós estaremos realizando o envio de um link com as instruções para você redefinir a sua senha.' >
+                  <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                    <Controller
+                      name="email"
+                      control={control}
+                      render={({ field }) => (
+                        <TextInput
+                          {...field}
+                          error={errors.email}
+                          placeholder='Informe seu e-mail'
+                        />
+                      )}
+                    />
+                    <Button disabled={!isValid}>enviar link</Button>
+                  </form>
+                </AuthCard>
+              ) : (
+                <AuthCard symbol=" ;)" title='Tudo certo' description='Foi enviado um e-mail para você com instruções de como redefinir a sua senha.' >
+                  <Button>voltar para o login</Button>
+                </AuthCard>
+              )}
             </RightContent>
           </Content>
         </Container>
