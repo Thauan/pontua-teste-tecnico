@@ -6,6 +6,7 @@ import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 import { Container, Content, Header, LeftContent, RightContent, Wrapper } from './styles';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup
   .object({
@@ -17,6 +18,7 @@ const schema = yup
 
 function AccountRecovery() {
   const [isSubmitted, setSubmited] = useState(false);
+  const navigate = useNavigate();
 
   const {
     control,
@@ -63,7 +65,7 @@ function AccountRecovery() {
                 </AuthCard>
               ) : (
                 <AuthCard symbol=" ;)" title='Tudo certo' description='Foi enviado um e-mail para você com instruções de como redefinir a sua senha.' >
-                  <Button>voltar para o login</Button>
+                  <Button onClick={() => navigate("/login", { replace: true })}>voltar para o login</Button>
                 </AuthCard>
               )}
             </RightContent>

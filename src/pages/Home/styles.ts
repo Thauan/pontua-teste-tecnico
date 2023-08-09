@@ -4,7 +4,7 @@ export const Container = styled.div`
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 15px;
     grid-row-gap: 15px;
 
@@ -28,4 +28,19 @@ export const Container = styled.div`
         grid-row-end: 3;
         grid-column-end: 5;
     }
-`
+`;
+
+export const Pagination = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+
+export const Page = styled.span<any>`
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 5px 5px;
+    background-color: ${props => props.isCurrent ? '#dddddd' : '#fff'};
+`;

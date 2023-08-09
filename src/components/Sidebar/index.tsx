@@ -32,6 +32,8 @@ const SideBar = () => {
 
 	const signOut = () => {
 		removeItemStorage('user');
+		removeItemStorage('agent');
+
 		logout();
 	}
 

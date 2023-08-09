@@ -30,8 +30,8 @@ const AuthProvider = ({ children, userData }: AuthProviderProps) => {
   };
 
   const chooseToAgent = async (agent: object) => {
-    setChoosedAgent(agent);
     navigate("/dashboard/home", { replace: true });
+    setChoosedAgent(agent);
   };
 
   const logout = () => {

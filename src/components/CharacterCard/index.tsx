@@ -21,4 +21,4 @@ const CharacterCard = ({ character, last, penult }: CharacterCardProps) => {
     );
 }
 
-export default CharacterCard;
+export { CharacterCard };
